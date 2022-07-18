@@ -29,7 +29,6 @@ const getImages = async (next_cursor) => {
 
     if (response || response.resources) {
       results.total = response.resources.length;
-      console.log('response:::', response);
       response.resources.forEach((item) => {
         results.images.push({
           public_id: item.public_id,
@@ -39,6 +38,7 @@ const getImages = async (next_cursor) => {
       });
     }
 
+    //next_cursor use pagination
     if (response.next_cursor) {
       results.next_cursor = response.next_cursor;
     }

@@ -5,9 +5,6 @@ const { ALLOWED_FORMATS } = require('../lib/constants');
 const { UnprocessableEntityException } = require('../lib/exception');
 const logger = require('../lib/logger');
 
-//Multer settings memory
-// const storage = multer.memoryStorage();
-
 //Configuration for Multer
 const multerStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -32,6 +29,12 @@ const upload = multer({
 
 const singleUpload = upload.single('file');
 
+/**
+ * Upload single file
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 const singleUploadMiddleware = (req, res, next) => {
   singleUpload(req, res, (error) => {
     if (error) {

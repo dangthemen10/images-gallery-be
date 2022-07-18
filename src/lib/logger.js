@@ -48,7 +48,7 @@ const logger = winston.createLogger({
   ],
 });
 
-// chỉ ghi log ra console nếu không phải là môi trường production
+// Only write log if not production env
 if (process.env.NODE_ENV !== 'production') {
   logger.add(
     new winston.transports.Console({
