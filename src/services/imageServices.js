@@ -66,8 +66,9 @@ const uploadImages = async (uploadFile) => {
     });
   }
   try {
+    uploadFile = uploadFile.path;
     if (uploadFile.buffer) {
-      const file64 = formatBuffer(uploadFile.path);
+      const file64 = formatBuffer(uploadFile);
       uploadFile = file64.content;
     }
 
@@ -79,14 +80,14 @@ const uploadImages = async (uploadFile) => {
       secure_url,
       api_key,
       ...uploadResult
-    } = await cloudinaryUpload(uploadFile.path);
+    } = await cloudinaryUpload(uploadFile);
 
     return {
       message: 'Successfully!',
       data: uploadResult,
     };
   } catch (error) {
-    logger.warn(`Service:imageServices:getImages error ${error.stack}`);
+    logger.warn(`Service:imageServices:uploadImages error ${error.stack}`);
     throw UnprocessableEntityException({
       status: 'UNPROCESSABLE_ENTITY',
       message: 'Uploads images to cloudinary failed!',
