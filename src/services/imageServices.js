@@ -66,8 +66,7 @@ const uploadImages = async (uploadFile) => {
     });
   }
   try {
-    uploadFile = uploadFile.path;
-    if (uploadFile.buffer) {
+    if (uploadFile.path) {
       const file64 = formatBuffer(uploadFile);
       uploadFile = file64.content;
     }

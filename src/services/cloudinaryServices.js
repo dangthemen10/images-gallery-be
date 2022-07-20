@@ -29,7 +29,7 @@ const cloudinaryUpload = async (file) => {
 const getImagesFromCloudinary = async (next_cursor) => {
   return (resources = await cloudinary.search
     .expression(`folder:${process.env.UPLOAD_FOLDER}`)
-    .max_results(20)
+    .max_results(12)
     .sort_by('uploaded_at', 'desc')
     .next_cursor(next_cursor)
     .execute());
