@@ -13,6 +13,17 @@ const logger = require('./src/lib/logger');
 
 const app = express();
 
+process.on('uncaughtException', (err, origin) => {
+  logger.error(
+    process.stderr.fd,
+    `Caught exception: ${err}\n` + `Exception origin: ${origin}`
+  );
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
 // Body-Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
